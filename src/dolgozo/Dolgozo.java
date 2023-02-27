@@ -24,6 +24,7 @@ public class Dolgozo extends javax.swing.JFrame {
     public Dolgozo() throws IOException {
         initComponents();
         emberek = modell.EmberGeneralas();
+        setComboBoxes();
 
     }
 
@@ -59,6 +60,18 @@ public class Dolgozo extends javax.swing.JFrame {
         jLabel1.setText("Lányok");
 
         jLabel2.setText("Fiúk");
+
+        lanyComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                lanyComboBoxItemStateChanged(evt);
+            }
+        });
+
+        fiuComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                fiuComboBoxItemStateChanged(evt);
+            }
+        });
 
         osszesitoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Összesítő"));
 
@@ -98,7 +111,7 @@ public class Dolgozo extends javax.swing.JFrame {
                     .addComponent(sixYearLabel)
                     .addComponent(allAgeLabel)
                     .addComponent(oldestLabel))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         osszesitoPanelLayout.setVerticalGroup(
             osszesitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,23 +166,24 @@ public class Dolgozo extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lanyComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(osszesitoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(notBothCheckbox)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(fiuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addComponent(lanyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(osszesitoPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(notBothCheckbox)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(fiuComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,16 +194,16 @@ public class Dolgozo extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(lanyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fiuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(notBothCheckbox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(saveButton))
                     .addComponent(osszesitoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
@@ -213,6 +227,30 @@ public class Dolgozo extends javax.swing.JFrame {
         setSixYearLabe(sixYears);
     }//GEN-LAST:event_lanyRadioButtonActionPerformed
 
+    private void lanyComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_lanyComboBoxItemStateChanged
+        String kivalasztott = (String)evt.getItem();
+        Ember emberunk = wichEmber(kivalasztott);
+        setAdatokPanel(emberunk.getKor(), emberunk.getMunkToltEv());
+    }//GEN-LAST:event_lanyComboBoxItemStateChanged
+
+    private void fiuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_fiuComboBoxItemStateChanged
+        String kivalasztott = (String)evt.getItem();
+        Ember emberunk = wichEmber(kivalasztott);
+        setAdatokPanel(emberunk.getKor(), emberunk.getMunkToltEv());
+    }//GEN-LAST:event_fiuComboBoxItemStateChanged
+
+    private Ember wichEmber(String kivalasztott){
+        Ember kivalsaztottEmber = null;
+        
+        for (Ember ember : emberek) {
+            if(ember.getNev() == kivalasztott){
+                kivalsaztottEmber = ember;
+            }
+        }
+        
+        return kivalsaztottEmber;
+    }
+    
     private void setOsszKor(int osszKor) {
         allAgeLabel.setText(
                 "összes kor: " + osszKor
@@ -234,10 +272,7 @@ public class Dolgozo extends javax.swing.JFrame {
     private int korOsszeadas(String nem) {
         int osszesen = 0;
         for (Ember ember : emberek) {
-            System.out.println("ember neme: "+ember.getNeme());
-            System.out.println(nem);
             if (ember.getNeme().equals(nem)) {
-                System.out.println(ember.getKor());
                 osszesen += ember.getKor();
             }
         }
@@ -272,11 +307,38 @@ public class Dolgozo extends javax.swing.JFrame {
 
         return workingForSixYear;
     }
+    
+    private void setComboBoxes(){
+        for (Ember ember : emberek) {
+            if (ember.getNeme().equals(FIU)) {
+                fiuComboBox.addItem(ember.getNev());
+            }else{
+                lanyComboBox.addItem(ember.getNev());
+            }
+        }
+        fiuComboBox.setSelectedIndex(-1);
+        lanyComboBox.setSelectedIndex(-1);
+    }
+    
+    private void setAdatokPanel(int kor, int dolgozottEv){
+        setAgeLabel(kor);
+        setWorkedHere(dolgozottEv);
+    }
 
-    /**
-     * @param args the command line arguments
-     */
-
+    
+    private void setAgeLabel(int kor) {
+        ageLabel.setText(
+                "kor: " + kor + " év"
+        );
+    }
+    
+    private void setWorkedHere(int dolgozottEv) {
+        workingSinceLabel.setText(
+                "mióta dolgozik: " + dolgozottEv + " éve"
+        );
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ageLabel;
     private javax.swing.JLabel allAgeLabel;
