@@ -45,7 +45,7 @@
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="notBothCheckbox" min="-2" max="-2" attributes="0"/>
+                          <Component id="BothCheckbox" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="dataPanel" max="32767" attributes="0"/>
                               <Component id="fiuComboBox" max="32767" attributes="0"/>
@@ -72,7 +72,7 @@
                   <Group type="102" attributes="0">
                       <Component id="dataPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="notBothCheckbox" min="-2" max="-2" attributes="0"/>
+                      <Component id="BothCheckbox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="saveButton" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -211,6 +211,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ment"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="dataPanel">
       <Properties>
@@ -259,7 +262,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JCheckBox" name="notBothCheckbox">
+    <Component class="javax.swing.JCheckBox" name="BothCheckbox">
       <Properties>
         <Property name="text" type="java.lang.String" value="Mindket&#x151; nem"/>
       </Properties>

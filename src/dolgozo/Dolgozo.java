@@ -5,7 +5,12 @@
 package dolgozo;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modell.Ember;
 import modell.Modell;
 
@@ -52,7 +57,7 @@ public class Dolgozo extends javax.swing.JFrame {
         dataPanel = new javax.swing.JPanel();
         ageLabel = new javax.swing.JLabel();
         workingSinceLabel = new javax.swing.JLabel();
-        notBothCheckbox = new javax.swing.JCheckBox();
+        BothCheckbox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dolgozók");
@@ -130,6 +135,11 @@ public class Dolgozo extends javax.swing.JFrame {
         );
 
         saveButton.setText("Ment");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         dataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Adatok"));
 
@@ -158,7 +168,7 @@ public class Dolgozo extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        notBothCheckbox.setText("Mindkető nem");
+        BothCheckbox.setText("Mindkető nem");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -179,7 +189,7 @@ public class Dolgozo extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(notBothCheckbox)
+                            .addComponent(BothCheckbox)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(fiuComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
@@ -199,7 +209,7 @@ public class Dolgozo extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(notBothCheckbox)
+                        .addComponent(BothCheckbox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(saveButton))
                     .addComponent(osszesitoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -228,29 +238,37 @@ public class Dolgozo extends javax.swing.JFrame {
     }//GEN-LAST:event_lanyRadioButtonActionPerformed
 
     private void lanyComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_lanyComboBoxItemStateChanged
-        String kivalasztott = (String)evt.getItem();
+        String kivalasztott = (String) evt.getItem();
         Ember emberunk = wichEmber(kivalasztott);
         setAdatokPanel(emberunk.getKor(), emberunk.getMunkToltEv());
     }//GEN-LAST:event_lanyComboBoxItemStateChanged
 
     private void fiuComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_fiuComboBoxItemStateChanged
-        String kivalasztott = (String)evt.getItem();
+        String kivalasztott = (String) evt.getItem();
         Ember emberunk = wichEmber(kivalasztott);
         setAdatokPanel(emberunk.getKor(), emberunk.getMunkToltEv());
     }//GEN-LAST:event_fiuComboBoxItemStateChanged
 
-    private Ember wichEmber(String kivalasztott){
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        try {
+            faljKiiratas();
+        } catch (IOException ex) {
+            Logger.getLogger(Dolgozo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private Ember wichEmber(String kivalasztott) {
         Ember kivalsaztottEmber = null;
-        
+
         for (Ember ember : emberek) {
-            if(ember.getNev() == kivalasztott){
+            if (ember.getNev() == kivalasztott) {
                 kivalsaztottEmber = ember;
             }
         }
-        
+
         return kivalsaztottEmber;
     }
-    
+
     private void setOsszKor(int osszKor) {
         allAgeLabel.setText(
                 "összes kor: " + osszKor
@@ -307,39 +325,61 @@ public class Dolgozo extends javax.swing.JFrame {
 
         return workingForSixYear;
     }
-    
-    private void setComboBoxes(){
+
+    private void setComboBoxes() {
         for (Ember ember : emberek) {
             if (ember.getNeme().equals(FIU)) {
                 fiuComboBox.addItem(ember.getNev());
-            }else{
+            } else {
                 lanyComboBox.addItem(ember.getNev());
             }
         }
         fiuComboBox.setSelectedIndex(-1);
         lanyComboBox.setSelectedIndex(-1);
     }
-    
-    private void setAdatokPanel(int kor, int dolgozottEv){
+
+    private void setAdatokPanel(int kor, int dolgozottEv) {
         setAgeLabel(kor);
         setWorkedHere(dolgozottEv);
     }
 
-    
     private void setAgeLabel(int kor) {
         ageLabel.setText(
                 "kor: " + kor + " év"
         );
     }
-    
+
     private void setWorkedHere(int dolgozottEv) {
         workingSinceLabel.setText(
                 "mióta dolgozik: " + dolgozottEv + " éve"
         );
     }
-    
-    
+
+    private void faljKiiratas() throws IOException {
+        String szoveg;
+
+        if (BothCheckbox.isSelected()) {
+            fiuRadioButtonActionPerformed(null);
+            szoveg = "Fiúk: \n" + oldestLabel.getText() + "\n" + allAgeLabel.getText() + "\n" + sixYearLabel.getText();
+            lanyRadioButtonActionPerformed(null);
+            szoveg += "\nLányok: \n" + oldestLabel.getText() + "\n" + allAgeLabel.getText() + "\n" + sixYearLabel.getText();
+            Files.writeString(Paths.get("dolgozok"), szoveg);
+        } else {
+            String nem = LANY;
+            if (lanyRadioButton.isSelected()) {
+                nem = "Lány";
+                szoveg = nem + ": \n" + oldestLabel.getText() + "\n" + allAgeLabel.getText() + "\n" + sixYearLabel.getText();
+            } else {
+                nem = "Fiúk";
+                szoveg = nem + ": \n" + oldestLabel.getText() + "\n" + allAgeLabel.getText() + "\n" + sixYearLabel.getText();
+            }
+            Files.writeString(Paths.get("dolgozok"), szoveg);
+        }
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox BothCheckbox;
     private javax.swing.JLabel ageLabel;
     private javax.swing.JLabel allAgeLabel;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -350,7 +390,6 @@ public class Dolgozo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JComboBox<String> lanyComboBox;
     private javax.swing.JRadioButton lanyRadioButton;
-    private javax.swing.JCheckBox notBothCheckbox;
     private javax.swing.JLabel oldestLabel;
     private javax.swing.JPanel osszesitoPanel;
     private javax.swing.JButton saveButton;
