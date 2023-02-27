@@ -44,6 +44,7 @@ public class Dolgozo extends javax.swing.JFrame {
         notBothCheckbox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Dolgozók");
 
         jLabel1.setText("Lányok");
 
