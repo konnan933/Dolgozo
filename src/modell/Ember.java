@@ -13,7 +13,7 @@ public class Ember {
     String nev;
     int kor;
     String neme;
-    int MunkToltEv;
+    int MunkToltEv = 0;
 
     
     public Ember(String sorok, String sep) {

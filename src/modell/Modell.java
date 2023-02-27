@@ -15,14 +15,15 @@ public class Modell {
         return sorok;
     }
 
-    public void EmberGeneralas() throws IOException {
+    public ArrayList<Ember> EmberGeneralas() throws IOException {
         List<String> sorok = beolvas();
         ArrayList<Ember> emberek = new ArrayList<>();
         
         for (String sor : sorok) {
             emberek.add(new Ember(sor, ";"));
-            System.out.println(sor);
         }
+        
+        return emberek;
     }
 
 }

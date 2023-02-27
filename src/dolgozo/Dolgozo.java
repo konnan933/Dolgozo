@@ -4,17 +4,27 @@
  */
 package dolgozo;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import modell.Ember;
+import modell.Modell;
+
 /**
  *
  * @author dervalics.a.laszlo
  */
 public class Dolgozo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Dolgozo
-     */
-    public Dolgozo() {
+    private final static String FIU = "F";
+    private final static String LANY = "L";
+
+    ArrayList<Ember> emberek = new ArrayList<>();
+    Modell modell = new Modell();
+
+    public Dolgozo() throws IOException {
         initComponents();
+        emberek = modell.EmberGeneralas();
+
     }
 
     /**
@@ -56,11 +66,21 @@ public class Dolgozo extends javax.swing.JFrame {
 
         buttonGroup1.add(lanyRadioButton);
         lanyRadioButton.setText("lány");
+        lanyRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lanyRadioButtonActionPerformed(evt);
+            }
+        });
 
         sixYearLabel.setText("6 éve dolgozó:");
 
         buttonGroup1.add(fiuRadioButton);
         fiuRadioButton.setText("fiú");
+        fiuRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fiuRadioButtonActionPerformed(evt);
+            }
+        });
 
         allAgeLabel.setText("összes kor:");
 
@@ -175,40 +195,87 @@ public class Dolgozo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void fiuRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fiuRadioButtonActionPerformed
+        int oldest = getOldest(FIU);
+        int osszKor = korOsszeadas(FIU);
+        String sixYears = getSixYear(FIU);
+        setOldestLabel(oldest);
+        setOsszKor(osszKor);
+        setSixYearLabe(sixYears);
+    }//GEN-LAST:event_fiuRadioButtonActionPerformed
+
+    private void lanyRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lanyRadioButtonActionPerformed
+        int oldest = getOldest(LANY);
+        int osszKor = korOsszeadas(LANY);
+        String sixYears = getSixYear(LANY);
+        setOldestLabel(oldest);
+        setOsszKor(osszKor);
+        setSixYearLabe(sixYears);
+    }//GEN-LAST:event_lanyRadioButtonActionPerformed
+
+    private void setOsszKor(int osszKor) {
+        allAgeLabel.setText(
+                "összes kor: " + osszKor
+        );
+    }
+
+    private void setOldestLabel(int oldestAge) {
+        oldestLabel.setText(
+                "legidősebb: " + oldestAge
+        );
+    }
+
+    private void setSixYearLabe(String sixYearStatus) {
+        sixYearLabel.setText(
+                "6 éve dolgozó: " + sixYearStatus
+        );
+    }
+
+    private int korOsszeadas(String nem) {
+        int osszesen = 0;
+        for (Ember ember : emberek) {
+            System.out.println("ember neme: "+ember.getNeme());
+            System.out.println(nem);
+            if (ember.getNeme().equals(nem)) {
+                System.out.println(ember.getKor());
+                osszesen += ember.getKor();
+            }
+        }
+
+        return osszesen;
+    }
+
+    private int getOldest(String nem) {
+        int oldest = emberek.get(0).getKor();
+
+        for (Ember ember : emberek) {
+            if (ember.getNeme().equals(nem)) {
+                if (ember.getKor() > oldest) {
+                    oldest = ember.getKor();
+                }
+            }
+        }
+
+        return oldest;
+    }
+
+    private String getSixYear(String nem) {
+        String workingForSixYear = "nincs";
+
+        for (Ember ember : emberek) {
+            if (ember.getNeme().equals(nem)) {
+                if (ember.getMunkToltEv() >= 6) {
+                    workingForSixYear = ember.getNev();
+                }
+            }
+        }
+
+        return workingForSixYear;
+    }
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dolgozo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dolgozo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dolgozo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dolgozo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Dolgozo().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ageLabel;

@@ -172,6 +172,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="l&#xe1;ny"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lanyRadioButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="sixYearLabel">
           <Properties>
@@ -185,6 +188,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="fi&#xfa;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fiuRadioButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="allAgeLabel">
           <Properties>
