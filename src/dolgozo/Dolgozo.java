@@ -26,17 +26,149 @@ public class Dolgozo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lanyComboBox = new javax.swing.JComboBox<>();
+        fiuComboBox = new javax.swing.JComboBox<>();
+        osszesitoPanel = new javax.swing.JPanel();
+        oldestLabel = new javax.swing.JLabel();
+        lanyRadioButton = new javax.swing.JRadioButton();
+        sixYearLabel = new javax.swing.JLabel();
+        fiuRadioButton = new javax.swing.JRadioButton();
+        allAgeLabel = new javax.swing.JLabel();
+        saveButton = new javax.swing.JButton();
+        dataPanel = new javax.swing.JPanel();
+        ageLabel = new javax.swing.JLabel();
+        workingSinceLabel = new javax.swing.JLabel();
+        notBothCheckbox = new javax.swing.JCheckBox();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Lányok");
+
+        jLabel2.setText("Fiúk");
+
+        osszesitoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Összesítő"));
+
+        oldestLabel.setText("legidősebb:");
+
+        buttonGroup1.add(lanyRadioButton);
+        lanyRadioButton.setText("lány");
+
+        sixYearLabel.setText("6 éve dolgozó:");
+
+        buttonGroup1.add(fiuRadioButton);
+        fiuRadioButton.setText("fiú");
+
+        allAgeLabel.setText("összes kor:");
+
+        javax.swing.GroupLayout osszesitoPanelLayout = new javax.swing.GroupLayout(osszesitoPanel);
+        osszesitoPanel.setLayout(osszesitoPanelLayout);
+        osszesitoPanelLayout.setHorizontalGroup(
+            osszesitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(osszesitoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(osszesitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(osszesitoPanelLayout.createSequentialGroup()
+                        .addComponent(lanyRadioButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fiuRadioButton))
+                    .addComponent(sixYearLabel)
+                    .addComponent(allAgeLabel)
+                    .addComponent(oldestLabel))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+        osszesitoPanelLayout.setVerticalGroup(
+            osszesitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(osszesitoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(osszesitoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lanyRadioButton)
+                    .addComponent(fiuRadioButton))
+                .addGap(18, 18, 18)
+                .addComponent(oldestLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(allAgeLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sixYearLabel)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        saveButton.setText("Ment");
+
+        dataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Adatok"));
+
+        ageLabel.setText("kor:");
+
+        workingSinceLabel.setText("Mitóta dolgozik:");
+
+        javax.swing.GroupLayout dataPanelLayout = new javax.swing.GroupLayout(dataPanel);
+        dataPanel.setLayout(dataPanelLayout);
+        dataPanelLayout.setHorizontalGroup(
+            dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dataPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ageLabel)
+                    .addComponent(workingSinceLabel))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+        dataPanelLayout.setVerticalGroup(
+            dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dataPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ageLabel)
+                .addGap(18, 18, 18)
+                .addComponent(workingSinceLabel)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        notBothCheckbox.setText("Mindkető nem");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lanyComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(osszesitoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(notBothCheckbox)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(fiuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(lanyComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fiuComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(notBothCheckbox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saveButton))
+                    .addComponent(osszesitoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(67, 67, 67))
         );
 
         pack();
@@ -78,5 +210,21 @@ public class Dolgozo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ageLabel;
+    private javax.swing.JLabel allAgeLabel;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel dataPanel;
+    private javax.swing.JComboBox<String> fiuComboBox;
+    private javax.swing.JRadioButton fiuRadioButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JComboBox<String> lanyComboBox;
+    private javax.swing.JRadioButton lanyRadioButton;
+    private javax.swing.JCheckBox notBothCheckbox;
+    private javax.swing.JLabel oldestLabel;
+    private javax.swing.JPanel osszesitoPanel;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JLabel sixYearLabel;
+    private javax.swing.JLabel workingSinceLabel;
     // End of variables declaration//GEN-END:variables
 }
